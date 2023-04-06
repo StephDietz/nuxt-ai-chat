@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "nuxt": "^3.2.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.6"
+  },
+  "dependencies": {
+    "eventsource-parser": "^0.1.0",
+    "stream": "^0.0.2"
+  }
+}
