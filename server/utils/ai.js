@@ -1,9 +1,9 @@
 import { OpenAIApi, Configuration } from 'openai';
 
-// const config = useRuntimeConfig();
+const config = useRuntimeConfig();
 
 const configuration = new Configuration({
-	apiKey: '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'
+	apiKey: process.env.NUXT_OPEN_AI_SECRET_KEY
 });
 const openai = new OpenAIApi(configuration);
 
