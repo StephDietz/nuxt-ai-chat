@@ -118,7 +118,7 @@
 			<div class="flex items-center justify-center my-2">
 				<span>Built with</span>
 				<a
-					href="https://nuxt.com/docs"
+					href="https://openai.com/research/gpt-4"
 					class="flex items-center mx-1 font-medium underline transition-colors underline-offset-4 hover:text-black/70"
 				>
 					<p>gpt-4</p>
@@ -138,7 +138,7 @@
 					<img src="/vercel.svg" alt="Vercel Logo" class="h-4 my-2 text-white" />
 				</a>
 				<a
-					href="https://github.com/vercel/examples/tree/main/storage/kv-redis-nuxt"
+					href="https://github.com/StephDietz/nuxt-ai-chat"
 					class="flex items-center font-medium underline transition-colors underline-offset-4 hover:text-black/70"
 				>
 					<img src="/github.svg" alt="GitHub Logo" class="h-4" />
