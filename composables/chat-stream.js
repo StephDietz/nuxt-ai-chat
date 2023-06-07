@@ -1,10 +1,10 @@
 const resolveStream = async ({ data, onChunk = () => {}, onReady = () => {}, stream }) => {
 	const reader = stream.pipeThrough(new TextDecoderStream()).getReader();
 	while (true) {
-		const stream = await reader.read();
-		if (stream.done) break;
+		const { done, value } = await reader.read();
+		if (done) break;
 
-		const chunks = stream?.value
+		const chunks = value
 			.replace(/^data: /gm, '')
 			.split('\n')
 			.filter((c) => Boolean(c.length) && c !== '[DONE]')
