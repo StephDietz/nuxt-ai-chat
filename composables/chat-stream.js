@@ -5,7 +5,7 @@ const resolveStream = async ({ data, onChunk = () => {}, onReady = () => {}, str
 		if (stream.done) break;
 
 		const chunks = stream?.value
-			.replaceAll(/^data: /gm, '')
+			.replace(/^data: /gm, '')
 			.split('\n')
 			.filter((c) => Boolean(c.length) && c !== '[DONE]')
 			.map((c) => JSON.parse(c));
