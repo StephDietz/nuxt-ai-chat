@@ -1,7 +1,7 @@
 <script setup>
 	const messages = ref([]);
 	const response = ref(null);
-
+	const loading = ref(false);
 	const prompt = ref('');
 
 	const getResponse = async ({ messages }) => {
@@ -16,6 +16,7 @@
 		return body;
 	};
 	const sendPrompt = async () => {
+		loading.value = true;
 		messages.value.push({
 			role: 'user',
 			content: prompt.value
@@ -38,6 +39,7 @@
 				response.value = null;
 			}
 		});
+		loading.value = false;
 	};
 </script>
 
@@ -73,6 +75,7 @@
 							</div>
 						</div>
 					</li>
+					<div class="flex justify-start p-4" v-if="loading"><span class="loader"></span></div>
 				</ul>
 				<form @submit.prevent="sendPrompt">
 					<div class="flex items-center w-full p-4">
@@ -148,3 +151,35 @@
 		</div>
 	</div>
 </template>
+
+<style>
+	.loader {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		display: block;
+		margin: 15px auto;
+		position: relative;
+		color: #d3d3d3;
+		box-sizing: border-box;
+		animation: animloader 2s linear infinite;
+	}
+
+	@keyframes animloader {
+		0% {
+			box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
+		}
+		25% {
+			box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 2px;
+		}
+		50% {
+			box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 2px, -38px 0 0 -2px;
+		}
+		75% {
+			box-shadow: 14px 0 0 2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
+		}
+		100% {
+			box-shadow: 14px 0 0 -2px, 38px 0 0 2px, -14px 0 0 -2px, -38px 0 0 -2px;
+		}
+	}
+</style>
