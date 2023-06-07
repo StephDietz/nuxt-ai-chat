@@ -45,7 +45,7 @@
 	<div class="max-w-xl mx-auto text-black">
 		<a
 			href="https://vercel.com/templates/next.js/blob-sveltekit"
-			class="flex justify-center px-10 py-2 mx-auto mt-20 space-x-1 text-sm font-medium text-center text-gray-600 transition-all rounded-full shadow-sm group sm:mt-0 bg-white/30 ring-1 ring-gray-900/5 hover:shadow-lg active:shadow-sm"
+			class="flex justify-center px-10 py-2 mx-auto space-x-1 text-sm font-medium text-center text-gray-600 transition-all rounded-full shadow-sm group bg-white/30 ring-1 ring-gray-900/5 hover:shadow-lg active:shadow-sm"
 		>
 			Deploy your own to Vercel
 		</a>
@@ -114,7 +114,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="flex flex-col justify-center w-full my-8">
+		<div class="flex flex-col justify-center w-full my-4">
 			<div class="flex items-center justify-center my-2">
 				<span>Built with</span>
 				<a
