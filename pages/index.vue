@@ -9,17 +9,31 @@
 	const loading = ref(false);
 	const message = ref('');
 
+	const scrollToEnd = () => {
+		setTimeout(() => {
+			const chatMessages = document.querySelector('.chat-messages > div:last-child');
+			chatMessages?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+		}, 100);
+	};
+
 	const sendPrompt = async () => {
+		loading.value = true;
+
 		if (message.value === '') return;
+
 		messages.value.push({
 			actor: 'Human',
 			message: message.value
 		});
+
+		scrollToEnd();
 		message.value = '';
+
 		const res = await fetch(`/api/chat`, {
 			body: JSON.stringify(messages.value.slice(1)),
 			method: 'post'
 		});
+
 		if (res.status === 200) {
 			const response = await res.json();
 			messages.value.push({
@@ -28,7 +42,9 @@
 			});
 			message.value = '';
 		}
-		console.log(messages);
+
+		loading.value = false;
+		scrollToEnd();
 	};
 </script>
 
@@ -43,8 +59,8 @@
 		<h1 class="my-8 text-5xl font-bold text-center text-black">AI Chatbot</h1>
 		<div class="max-w-xl mx-auto">
 			<div class="bg-white rounded-md shadow h-[60vh] flex flex-col justify-between">
-				<ul class="overflow-auto">
-					<li v-for="(message, i) in messages" :key="i" class="flex flex-col p-4">
+				<div class="h-full overflow-auto chat-messages">
+					<div v-for="(message, i) in messages" :key="i" class="flex flex-col p-4">
 						<div v-if="message.actor === 'AI'" class="pr-8 mr-auto">
 							<div class="p-2 mt-1 text-sm text-gray-700 bg-gray-200 rounded-lg text-smp-2">
 								{{ message.message }}
@@ -55,17 +71,11 @@
 								{{ message.message }}
 							</div>
 						</div>
-					</li>
-					<!-- Incoming message -->
-					<!-- <li v-if="response" class="flex p-4">
-						<div class="pr-8">
-							<div class="p-2 mt-1 text-sm text-gray-700 bg-gray-200 rounded-lg text-smp-2">
-								{{ response.content }}
-							</div>
-						</div>
-					</li> -->
-					<div class="flex justify-start p-4" v-if="loading"><span class="loader"></span></div>
-				</ul>
+					</div>
+					<div class="p-4 ml-10 mr-auto" v-if="loading">
+						<span class="loader"></span>
+					</div>
+				</div>
 				<form @submit.prevent="sendPrompt">
 					<div class="flex items-center w-full p-4">
 						<input
@@ -147,7 +157,6 @@
 		height: 12px;
 		border-radius: 50%;
 		display: block;
-		margin: 15px auto;
 		position: relative;
 		color: #d3d3d3;
 		box-sizing: border-box;
@@ -165,10 +174,7 @@
 			box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 2px, -38px 0 0 -2px;
 		}
 		75% {
-			box-shadow: 14px 0 0 2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
-		}
-		100% {
-			box-shadow: 14px 0 0 -2px, 38px 0 0 2px, -14px 0 0 -2px, -38px 0 0 -2px;
+			box-shadow: 14px 0 0 2px, 38px 0 0 -2px;
 		}
 	}
 </style>

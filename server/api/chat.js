@@ -1,6 +1,5 @@
-const config = useRuntimeConfig();
-
 export default defineEventHandler(async (event) => {
+	const config = useRuntimeConfig();
 	let prompt = 'You are a chat bot';
 	let messages = [];
 	const previosMessages = await readBody(event);
@@ -23,6 +22,7 @@ export default defineEventHandler(async (event) => {
 			stop: [' Human:', ' AI:']
 		})
 	});
+
 	const res = await req.json();
 	const result = res.choices[0];
 	return {
