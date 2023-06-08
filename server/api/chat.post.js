@@ -35,6 +35,6 @@ export default defineEventHandler(async (event) => {
 		return sendStream(event, stream);
 	} catch (error) {
 		console.error('Error during event handling:', error);
-		return sendError(event, 500, 'Internal Server Error');
+		return sendError(event, 500, error.message || 'Internal Server Error');
 	}
 });

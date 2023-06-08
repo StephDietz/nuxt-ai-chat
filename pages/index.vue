@@ -3,6 +3,7 @@
 	const response = ref(null);
 	const loading = ref(false);
 	const prompt = ref('');
+	const responseChunks = ref([]);
 
 	const getResponse = async ({ messages }) => {
 		const { body } = await fetch('/api/chat', {
@@ -16,30 +17,24 @@
 		return body;
 	};
 	const sendPrompt = async () => {
-		loading.value = true;
 		messages.value.push({
 			role: 'user',
 			content: prompt.value
 		});
 		prompt.value = '';
 
-		const stream = await getResponse({ messages: messages.value });
-
-		response.value = {
-			role: 'assistant',
-			content: ''
-		};
-		useChatStream({
-			stream,
-			onChunk: ({ data }) => {
-				response.value.content += data;
-			},
-			onReady: () => {
-				messages.value.push(response.value);
-				response.value = null;
-			}
+		const response = await fetch('/api/chat', {
+			method: 'POST',
+			body: JSON.stringify({
+				messages: messages.value
+			})
 		});
-		loading.value = false;
+
+		const { chunks } = await response.json();
+
+		for (let chunk of chunks) {
+			responseChunks.value.push(chunk);
+		}
 	};
 </script>
 
