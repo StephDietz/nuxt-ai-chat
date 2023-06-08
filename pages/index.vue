@@ -120,10 +120,10 @@
 			<div class="flex items-center justify-center my-2">
 				<span>Built with</span>
 				<a
-					href="https://openai.com/research/gpt-4"
+					href="https://openai.com/blog/gpt-3-apps"
 					class="flex items-center mx-1 font-medium underline transition-colors underline-offset-4 hover:text-black/70"
 				>
-					<p>gpt-4</p>
+					<p>gpt-3</p>
 				</a>
 				<span>and</span>
 				<a
