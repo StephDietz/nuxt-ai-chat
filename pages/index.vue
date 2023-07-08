@@ -1,7 +1,7 @@
 <script setup>
 	const messages = ref([
 		{
-			role: 'AI',
+			role: 'system',
 			message: 'Hello! How can I help you?'
 		}
 	]);
