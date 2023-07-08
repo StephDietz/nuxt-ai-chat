@@ -20,7 +20,7 @@
 		loading.value = true;
 
 		messages.value.push({
-			role: 'User',
+			role: 'system',
 			message: message.value
 		});
 
@@ -35,12 +35,12 @@
 		if (res.status === 200) {
 			const response = await res.json();
 			messages.value.push({
-				role: 'AI',
+				role: 'system',
 				message: response?.message
 			});
 		} else {
 			messages.value.push({
-				role: 'AI',
+				role: 'system',
 				message: 'Sorry, an error occurred.'
 			});
 		}
