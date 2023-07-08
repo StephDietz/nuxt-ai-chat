@@ -1,7 +1,7 @@
 <script setup>
 	const messages = ref([
 		{
-			role: 'system',
+			role: 'AI',
 			message: 'Hello! How can I help you?'
 		}
 	]);
@@ -20,7 +20,7 @@
 		loading.value = true;
 
 		messages.value.push({
-			role: 'system',
+			role: 'User',
 			message: message.value
 		});
 
@@ -35,12 +35,12 @@
 		if (res.status === 200) {
 			const response = await res.json();
 			messages.value.push({
-				role: 'system',
+				role: 'AI',
 				message: response?.message
 			});
 		} else {
 			messages.value.push({
-				role: 'system',
+				role: 'AI',
 				message: 'Sorry, an error occurred.'
 			});
 		}
