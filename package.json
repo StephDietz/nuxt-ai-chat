@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "eventsource-parser": "^0.1.0",
-    "openai": "^3.2.1",
+    "openai": "^4.20.1",
     "stream": "^0.0.2"
   }
 }
