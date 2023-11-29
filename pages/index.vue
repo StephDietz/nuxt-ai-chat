@@ -1,8 +1,8 @@
 <script setup>
 	const messages = ref([
 		{
-			role: 'AI',
-			message: 'Hello! How can I help you?'
+			role: 'assistant',
+			content: 'Hello! How can I help you?'
 		}
 	]);
 	const loading = ref(false);
@@ -20,8 +20,8 @@
 		loading.value = true;
 
 		messages.value.push({
-			role: 'User',
-			message: message.value
+			role: 'user',
+			content: message.value
 		});
 
 		scrollToEnd();
@@ -35,13 +35,13 @@
 		if (res.status === 200) {
 			const response = await res.json();
 			messages.value.push({
-				role: 'AI',
-				message: response?.message
+				role: 'assistant',
+				content: response?.message.content
 			});
 		} else {
 			messages.value.push({
-				role: 'AI',
-				message: 'Sorry, an error occurred.'
+				role: 'assistant',
+				content: 'Sorry, an error occurred.'
 			});
 		}
 
@@ -63,14 +63,14 @@
 			<div class="bg-white rounded-md shadow h-[60vh] flex flex-col justify-between">
 				<div class="h-full overflow-auto chat-messages">
 					<div v-for="(message, i) in messages" :key="i" class="flex flex-col p-4">
-						<div v-if="message.role === 'AI'" class="pr-8 mr-auto">
+						<div v-if="message.role === 'assistant'" class="pr-8 mr-auto">
 							<div class="p-2 mt-1 text-sm text-gray-700 bg-gray-200 rounded-lg text-smp-2">
-								{{ message.message }}
+								{{ message.content }}
 							</div>
 						</div>
 						<div v-else class="pl-8 ml-auto">
 							<div class="p-2 mt-1 text-sm text-white bg-blue-400 rounded-lg">
-								{{ message.message }}
+								{{ message.content }}
 							</div>
 						</div>
 					</div>
